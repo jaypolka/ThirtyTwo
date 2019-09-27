@@ -1,0 +1,25 @@
+<html>
+<body>
+<canvas id="cv" width="600" height="600" style="border: 1px solid black;"></canvas>
+</body>
+<script>
+//cerner_2^5_2019
+var ctx = document.getElementById('cv').getContext('2d');
+function drawBall(x, y) {
+  ctx.beginPath();
+  ctx.arc(x, y, 8, 0, 2 * Math.PI);
+  ctx.fill();
+}
+var vector = {x: 30, y: 80, angle: 35 * Math.PI / 180};
+function animate() {
+ctx.clearRect(0, 0, 600, 600);
+drawBall(vector.x, vector.y);
+vector.x += 2 * Math.sin(vector.angle);
+vector.y += 2 * Math.cos(vector.angle);
+vector.y >= 595 ? vector.angle = Math.PI - vector.angle : vector.x >= 595 ? vector.angle = 2 * Math.PI - vector.angle : vector.x <= 5 ? vector.angle = 2 * Math.PI - vector.angle : vector.y <= 5 ? vector.angle = Math.PI - vector.angle : 0;
+vector.angle -= (Math.PI * 2) * Math.round(vector.angle / (2 * Math.PI));
+vector.angle < 0 ? vector.angle = Math.PI * 2 + vector.angle : 0;
+}
+setInterval(animate, 5);
+</script>
+</html>
